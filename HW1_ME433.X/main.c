@@ -26,7 +26,7 @@
 #pragma config FPLLIDIV = DIV_2 // divide input clock to be in range 4-5MHz
 #pragma config FPLLMUL = MUL_24 // multiply clock after FPLLIDIV
 #pragma config FPLLODIV = DIV_2 // divide clock after FPLLMUL to get 48MHz
-#pragma config UPLLIDIV = DIV_12 // divider for the 8MHz input clock, then multiplied by 12 to get 48MHz for USB
+#pragma config UPLLIDIV = DIV_2 // divider for the 8MHz input clock, then multiplied by 12 to get 48MHz for USB
 #pragma config UPLLEN = ON // USB clock on
 
 // DEVCFG3
@@ -62,7 +62,7 @@ int main() {
     
     while(1) {
         _CP0_SET_COUNT(0);
-        while(_CP0_GET_COUNT()<40000){;}
+        while(_CP0_GET_COUNT()<25000){;} //0.001/(1/25000000)
         LATAINV=0b10000;
         _CP0_SET_COUNT(0);
         while(!PORTBbits.RB4){;}
